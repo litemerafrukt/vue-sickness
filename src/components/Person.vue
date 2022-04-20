@@ -4,12 +4,14 @@ import { personProps, colors } from "../machines/props"
 
 const props = defineProps({
   inhabitant: { type: Object as any, required: true },
+  width: { type: Number, default: personProps.width },
+  height: { type: Number, default: personProps.height },
 })
 
 const state = useSelector(props.inhabitant, (state: any) => ({
   x: state.context.x,
   y: state.context.y,
-  fill: colors[state.value as "contagious" | "sick" | "immune"] || "#aaa",
+  fill: colors[state.value as "notInfected" | "contagious" | "sick" | "immune"],
 }))
 </script>
 
@@ -20,8 +22,8 @@ const state = useSelector(props.inhabitant, (state: any) => ({
     xmlns:xlink="http://www.w3.org/1999/xlink"
     :x="state.x"
     :y="state.y"
-    :width="personProps.width"
-    :height="personProps.height"
+    :width="props.width"
+    :height="props.height"
     viewBox="0, 0, 40, 95"
   >
     <g id="Layer_1">

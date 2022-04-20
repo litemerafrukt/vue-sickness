@@ -1,30 +1,14 @@
 <script setup lang="ts">
-import { useMachine } from "@xstate/vue"
-import { world } from "./machines/world"
-import Person from "./components/Person.vue"
-import { worldProps } from "./machines/props"
-
-const { width, height } = worldProps
-
-const { state } = useMachine(world)
+import { RouterView } from "vue-router"
 </script>
 
 <template>
+  <nav>
+    <router-link to="/">The World</router-link>
+    <router-link to="/an-inhabitant">An Inhabitant</router-link>
+  </nav>
   <main>
-    <svg
-      :viewBox="`0 0 ${width} ${height}`"
-      :width="width"
-      :height="height"
-      xmlns="http://www.w3.org/2000/svg"
-      stroke="#777"
-      fill="#aaa"
-    >
-      <Person
-        v-for="inhabitant in state.context.inhabitants"
-        :key="inhabitant.id"
-        :inhabitant="inhabitant"
-      />
-    </svg>
+    <router-view></router-view>
   </main>
 </template>
 
@@ -46,5 +30,10 @@ main {
 
 main > svg {
   border: 1px solid #aaa;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
 }
 </style>
